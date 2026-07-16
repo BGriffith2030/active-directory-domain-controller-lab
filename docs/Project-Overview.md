@@ -2,122 +2,153 @@
 
 ## Introduction
 
-The Active Directory Domain Controller Lab is a virtualized environment designed to simulate a small enterprise Windows infrastructure. This project focuses on deploying a Windows Server 2022 Domain Controller, configuring Active Directory Domain Services (AD DS), setting up DNS, and onboarding a Windows 11 workstation into the domain.
+This project documents the design, deployment, and configuration of a Windows Server 2022 Active Directory Domain Controller within a virtualized lab environment using Oracle VirtualBox.
 
-The purpose of this lab is to build hands-on experience with identity management, system administration, networking fundamentals, and enterprise IT operations.
+The primary objective of this lab was to gain practical experience deploying Microsoft's Active Directory Domain Services (AD DS) from the ground up while documenting each stage of the implementation. The environment was designed to simulate the foundational components of an enterprise Windows domain, including centralized identity management, DNS services, user administration, and organizational structure.
 
----
-
-## Lab Goals
-
-This project aims to:
-
-- Deploy a fully functional Windows Server 2022 domain controller
-- Configure Active Directory Domain Services (AD DS)
-- Implement DNS for domain operations
-- Create Organizational Units (OUs), users, and security groups
-- Build and configure a Windows 11 domain workstation
-- Demonstrate core identity and access management concepts
-- Document each configuration step with screenshots and explanations
+Rather than focusing only on installation, this project emphasizes planning, documentation, troubleshooting, and repeatable deployment practices commonly used by systems administrators and enterprise IT teams.
 
 ---
 
-## Environment Summary
+# Project Goals
 
-### Domain
-griffith.local
+The goals of this project were to:
 
-### Systems
-
-| System              | Role                                           |
-| ------------------- | ---------------------------------------------- |
-| Windows Server 2022 | Domain Controller, AD DS, DNS                  |
-| Windows 11          | Domain Workstation / Client                    |
-
----
-
-## Architecture Overview
-
-The lab uses VirtualBox to host both the domain controller and the Windows 11 workstation. Networking is configured using NAT + Host-Only adapters to allow:
-
-- Internet access for updates  
-- Internal communication between DC01 and WIN11  
-- DNS resolution inside the domain  
-
-The domain controller manages authentication, identity, and directory services for the environment.
+- Build a Windows Server 2022 virtual machine using Oracle VirtualBox.
+- Configure enterprise-style virtual networking.
+- Assign static IPv4 addressing.
+- Install and configure Active Directory Domain Services (AD DS).
+- Promote the server to a Domain Controller.
+- Create a new Active Directory forest named **griffith.local**.
+- Configure DNS to support Active Directory.
+- Design a logical Organizational Unit (OU) structure.
+- Create domain user accounts.
+- Create security groups for administration.
+- Document every major deployment step with screenshots.
+- Build a professional GitHub portfolio project suitable for demonstrating Windows Server administration skills.
 
 ---
 
-## Key Components
+# Project Scope
 
-### Active Directory Domain Services (AD DS)
-- Domain creation  
-- Organizational Units  
-- Security Groups  
-- User Accounts  
-- Domain authentication  
+This repository focuses on the successful deployment and initial configuration of a Windows Server Active Directory environment.
 
-### DNS Configuration
-- Forward lookup zones  
-- Host records  
-- Domain name resolution  
+Completed components include:
 
-### Windows 11 Client
-- Network configuration  
-- Domain join  
-- User login validation  
+- Oracle VirtualBox installation
+- Virtual machine creation
+- Windows Server 2022 installation
+- Virtual hardware configuration
+- Network adapter configuration
+- Static IP configuration
+- Active Directory Domain Services installation
+- Domain Controller promotion
+- DNS configuration
+- Organizational Unit creation
+- User account management
+- Security group management
+- Technical documentation
 
----
-
-## Skills Practiced
-
-- Windows Server installation and configuration  
-- Domain controller promotion  
-- DNS setup and troubleshooting  
-- Identity and access management  
-- Organizational Unit design  
-- Workstation domain onboarding  
-- Technical documentation  
-- Virtualization and networking  
+The project intentionally concludes after the successful deployment of the Domain Controller. Client domain integration and advanced enterprise administration are planned as future enhancements.
 
 ---
 
-## Project Structure
+# Lab Environment
 
-active-directory-domain-controller-lab/
-│
-├── docs/
-│   ├── Project-Overview.md
-│   ├── Environment-Setup.md
-│   ├── Active-Directory-Guide.md
-│   ├── Networking-Guide.md
-│   └── Windows-Client-Guide.md
-│
-├── diagrams/
-├── screenshots/
-├── scripts/
-└── README.md
+## Host Platform
 
+- Oracle VirtualBox
 
----
+## Server Operating System
 
-## Documentation Included
+- Windows Server 2022
 
-This project includes:
+## Server Name
 
-- Environment setup instructions  
-- Active Directory configuration guide  
-- Networking configuration guide  
-- Windows client setup guide  
-- Architecture diagrams  
-- Screenshot gallery  
-- Technical explanations  
+- DC01
+
+## Domain Name
+
+- griffith.local
+
+## Network Configuration
+
+- Host-Only Virtual Network
 
 ---
 
-## Conclusion
+# Technologies Used
 
-This lab provides a complete, hands-on demonstration of building a functional Windows domain environment from scratch. It showcases essential system administration skills, identity management concepts, and enterprise IT fundamentals — all documented and organized in a professional GitHub format.
+| Technology | Purpose |
+|------------|---------|
+| Windows Server 2022 | Domain Controller |
+| Oracle VirtualBox | Virtualization |
+| Active Directory Domain Services | Identity Management |
+| DNS | Name Resolution |
+| IPv4 | Network Configuration |
+| Git | Version Control |
+| GitHub | Documentation and Portfolio |
+
+---
+
+# Skills Demonstrated
+
+This project demonstrates practical experience with:
+
+- Windows Server administration
+- Active Directory deployment
+- DNS configuration
+- IPv4 networking
+- Virtual machine administration
+- Organizational Unit management
+- User account administration
+- Security group management
+- Technical troubleshooting
+- Documentation best practices
+
+---
+
+# Deliverables
+
+This repository contains:
+
+- Complete project documentation
+- Deployment walkthrough
+- Configuration notes
+- Network architecture diagrams
+- Deployment screenshots
+- Lessons learned
+- Future enhancement roadmap
+
+---
+
+# Learning Outcomes
+
+Upon completion of this project, the following competencies were demonstrated:
+
+- Understanding of enterprise identity management fundamentals.
+- Practical deployment of Active Directory Domain Services.
+- Configuration of DNS services supporting Active Directory.
+- Administration of Windows Server within a virtualized environment.
+- Creation and organization of enterprise directory objects.
+- Documentation of infrastructure deployments using GitHub.
+
+---
+
+# Future Development
+
+Future iterations of this project will expand the environment by adding:
+
+- Windows 11 Pro domain client
+- Domain joining
+- Group Policy Objects (GPOs)
+- File sharing and NTFS permissions
+- PowerShell automation
+- Security auditing
+- Event log monitoring
+- Active Directory backup and recovery
+
+These additions will transform the current deployment into a more complete enterprise Active Directory lab while maintaining this repository as the foundation of the overall project.
 
 
 
