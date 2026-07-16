@@ -1,205 +1,183 @@
-# Environment Setup Guide
+# Environment Setup
 
-## Introduction
+# Overview
 
-This guide explains how to set up the virtual environment used in the Active Directory Domain Controller Lab. You will install VirtualBox, prepare ISO files, create the Windows Server 2022 domain controller (DC01), and build the Windows 11 workstation (WIN11). Completing these steps ensures a clean, consistent, and functional lab environment.
+This document describes the hardware, software, virtualization platform, networking, and project structure used to build the Active Directory Domain Controller lab environment.
 
----
-
-## 1. Project Folder Structure
-
-Your repository should contain the following folders:
-
-diagrams/
-docs/
-screenshots/
-scripts/
-LICENSE
-README.md
-
-
-Inside **docs**, you will place all documentation files, including this one.
+The objective of this environment was to create a repeatable Windows Server 2022 deployment that closely resembles the foundation of an enterprise Active Directory infrastructure while remaining suitable for a personal cybersecurity home lab.
 
 ---
 
-## 2. Install VirtualBox
+# Host Environment
 
-Download and install VirtualBox:
+The lab was deployed on a Windows-based host computer using Oracle VirtualBox as the virtualization platform.
 
-https://www.virtualbox.org/wiki/Downloads
-
-After installation:
-
-- Launch VirtualBox  
-- Confirm it opens without errors  
-- Verify the default VM storage location  
+The host system provides the compute resources required to run Windows Server 2022 and supporting virtual machines while allowing the lab environment to remain isolated from the production network.
 
 ---
 
-## 3. Prepare ISO Files
+# Virtualization Platform
 
-Download the required operating system ISO files:
+**Oracle VirtualBox**
 
-### Windows Server 2022 ISO
-- Microsoft Evaluation Center  
-- Save as: `Windows_Server_2022.iso`
+Oracle VirtualBox was selected because it is a free enterprise-grade hypervisor capable of supporting Windows Server environments, custom virtual networking, snapshots, and multiple virtual machines.
 
-### Windows 11 ISO
-- Microsoft Software Download  
-- Save as: `Windows_11.iso`
+VirtualBox was used to:
 
-Place both ISO files inside a folder you create:
-
-isos/
-
-
-This keeps your operating system images organized.
+- Create the Domain Controller virtual machine
+- Allocate virtual hardware
+- Configure storage
+- Configure networking
+- Manage virtual machine lifecycle
 
 ---
 
-## 4. Create and Install DC01 (Domain Controller)
+# Virtual Machine Configuration
 
-### VM Configuration
+## Virtual Machine Name
 
-- **Name:** DC01  
-- **Type:** Microsoft Windows  
-- **Version:** Windows Server 2022 (64‑bit)  
-- **CPU:** 2 cores  
-- **RAM:** 4096 MB  
-- **Storage:** 50 GB  
-- **Network:**  
-  - Adapter 1: NAT  
-  - Adapter 2: Host‑Only  
-
-### Attach ISO
-
-VirtualBox → DC01 → Settings → Storage → Add ISO  
-Select: `Windows_Server_2022.iso`
-
-### Install Windows Server 2022
-
-- Boot the VM  
-- Choose “Windows Server 2022 Standard (Desktop Experience)”  
-- Create Administrator password  
-- Log in  
-- Install Windows updates  
-
-### Rename the Server
-
-Open PowerShell:
-
-Rename-Computer -NewName "DC01" -Restart
-
-
-### Configure Static IP
-
-Set the following IPv4 settings:
-
-IP Address: 192.168.10.10
-Subnet Mask: 255.255.255.0
-Default Gateway: 192.168.10.1
-DNS Server: 192.168.10.10
-
-
-This ensures the domain controller handles DNS internally.
+```
+DC01
+```
 
 ---
 
-## 5. Install Active Directory Domain Services (AD DS)
+## Guest Operating System
 
-Open **Server Manager**:
+```
+Windows Server 2022
+```
 
-- Add Roles and Features  
-- Select **Active Directory Domain Services**  
-- Complete installation  
+---
 
-After installation:
+## Virtual Hardware
 
-- Click **Promote this server to a domain controller**  
-- Choose **Add a new forest**  
-- Enter domain:
+The virtual machine was configured with hardware resources appropriate for a small Active Directory deployment.
 
+Example configuration:
+
+- 2 Virtual CPUs
+- 4–8 GB RAM
+- Virtual Hard Disk
+- EFI Boot Enabled
+- Virtual Optical Drive for Windows Server installation media
+
+---
+
+# Storage Configuration
+
+A dedicated virtual hard disk was created for the Windows Server operating system.
+
+Installation media was attached through the VirtualBox virtual optical drive using the official Windows Server 2022 ISO image.
+
+---
+
+# Network Configuration
+
+The lab uses Oracle VirtualBox virtual networking.
+
+The Domain Controller was configured with a Host-Only Adapter to allow communication between virtual machines while keeping the environment isolated from the physical production network.
+
+---
+
+## Static IP Configuration
+
+Domain Controller
+
+```
+Hostname:
+DC01
+
+IPv4:
+192.168.56.101
+
+Subnet Mask:
+255.255.255.0
+```
+
+Static addressing ensures reliable DNS resolution and allows Active Directory services to function correctly.
+
+---
+
+# Active Directory Environment
+
+Domain Name
+
+```
 griffith.local
+```
 
+Server Role
 
-- Create DSRM password  
-- Accept default paths  
-- Install and reboot  
+```
+Domain Controller
+```
 
-DC01 is now your domain controller.
+Installed Services
 
----
-
-## 6. Create Windows 11 Client (WIN11)
-
-### VM Configuration
-
-- **Name:** WIN11  
-- **Type:** Microsoft Windows  
-- **Version:** Windows 11 (64‑bit)  
-- **CPU:** 2 cores  
-- **RAM:** 4096 MB  
-- **Storage:** 64 GB  
-- **Network:**  
-  - Adapter 1: NAT  
-  - Adapter 2: Host‑Only  
-
-### Attach ISO
-
-VirtualBox → WIN11 → Settings → Storage → Add ISO  
-Select: `Windows_11.iso`
-
-### Install Windows 11
-
-- Choose region and keyboard  
-- Create a local account  
-- Log in  
-- Install Windows updates  
+- Active Directory Domain Services
+- DNS Server
 
 ---
 
-## 7. Configure Windows 11 Networking
+# Project Directory Structure
 
-Set DNS to the domain controller:
+The GitHub repository is organized to separate documentation, screenshots, diagrams, and scripts.
 
-DNS Server: 192.168.10.10
-
-
-Verify connectivity:
-
-ping dc01.griffith.local
-
-
-If the ping succeeds, networking is correct.
-
----
-
-## 8. Join Windows 11 to the Domain
-
-Open System Settings:
-
-- Rename this PC (Advanced)  
-- Change → Domain: `griffith.local`  
-- Enter domain credentials  
-- Restart the workstation  
-
-Log in using:
-
-griffith\username
-
+```
+active-directory-domain-controller-lab
+│
+├── docs
+├── diagrams
+├── screenshots
+├── scripts
+├── LICENSE
+└── README.md
+```
 
 ---
 
-## Conclusion
+# Deployment Workflow
 
-Your environment is now fully set up:
+The environment was deployed using the following workflow:
 
-- VirtualBox installed  
-- Windows Server 2022 domain controller configured  
-- Windows 11 workstation deployed  
-- Networking configured  
-- Domain join successful  
+1. Download Windows Server installation media.
+2. Install Oracle VirtualBox.
+3. Create the DC01 virtual machine.
+4. Configure virtual hardware.
+5. Install Windows Server 2022.
+6. Configure static networking.
+7. Install Active Directory Domain Services.
+8. Promote the server to a Domain Controller.
+9. Configure DNS.
+10. Create Organizational Units, users, and security groups.
+11. Document each deployment phase.
 
-You are ready to continue with Active Directory configuration and user management.
+---
 
+# Design Considerations
+
+Several design decisions were made during deployment:
+
+- Static IPv4 addressing for server reliability
+- Host-Only networking for lab isolation
+- Separate documentation for each deployment phase
+- Screenshot capture throughout implementation
+- GitHub used for version-controlled documentation
+
+---
+
+# Outcome
+
+The environment provides a functional Windows Server 2022 Active Directory Domain Controller suitable for practicing:
+
+- Windows Server administration
+- Active Directory management
+- DNS administration
+- Virtual networking
+- User and group administration
+- Enterprise documentation
+- Infrastructure troubleshooting
+
+This environment serves as the foundation for future enhancements, including Windows client integration, Group Policy deployment, PowerShell automation, and additional enterprise administration scenarios.
 
