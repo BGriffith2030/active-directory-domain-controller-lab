@@ -117,9 +117,9 @@ The primary objectives of this project were to:
 
 The diagram below illustrates the complete lab environment, including the virtualization platform, network topology, Active Directory structure, DNS integration, and deployment workflow.
 
-> **Location:** `diagrams/Enterprise-Architecture.png`
+> **Location:** `diagrams/Enterprise-Architecture.png.png`
 
-![Enterprise Architecture](diagrams/Enterprise-Architecture.png)
+![Enterprise Architecture](diagrams/Enterprise-Architecture.png.png)
 
 ---
 
@@ -458,4 +458,3 @@ Future updates will expand the environment with enterprise client management, Gr
 This repository demonstrates practical, hands-on experience with enterprise Windows infrastructure deployment and administration. It showcases the ability to plan, deploy, configure, troubleshoot, and document a Windows Server 2022 Active Directory environment using industry-standard technologies and professional documentation practices.
 
 It is intended to reflect the skills expected of an entry-level Systems Administrator, IT Support Specialist, Infrastructure Technician, or Cybersecurity Analyst.
-
