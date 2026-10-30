@@ -268,6 +268,8 @@ Detailed documentation for each phase of the deployment is available in the **do
 | [Troubleshooting](docs/Troubleshooting.md) | Deployment issues and resolutions |
 | [Lessons Learned](docs/Lessons-Learned.md) | Technical concepts reinforced during the project |
 | [Future Enhancements](docs/Future-Enhancements.md) | Planned expansion of the lab |
+| [Build Checklist](docs/Build-Checklist.md) | Condensed step by step deployment checklist |
+| [Hardening Guide](docs/Hardening.md) | Group Policy hardening, audit policy, and service lockdown for the domain |
 
 ---
 
